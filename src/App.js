@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleIncrease = () => {
+    setCount(count + 1);
+    setActiveButton('increase');
+  };
+
+  const handleDecrease = () => {
+    setCount(count - 1);
+    setActiveButton('decrease');
+  };
+
+  const handleReset = () => {
+    setCount(0);
+    setActiveButton('reset');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1 className="title">✯ Let's Count ✯</h1>
+      <h2 className="count">{count}</h2>
+      <div className="button-container">
+        <button
+          className={`button ${activeButton === 'increase' ? 'active' : ''}`}
+          onClick={handleIncrease}
         >
-          Learn React
-        </a>
-      </header>
+          Increase
+        </button>
+        <button
+          className={`button ${activeButton === 'decrease' ? 'active' : ''}`}
+          onClick={handleDecrease}
+        >
+          Decrease
+        </button>
+        <button
+          className={`button ${activeButton === 'reset' ? 'active' : ''}`}
+          onClick={handleReset}
+        >
+          Set to Zero
+        </button>
+      </div>
     </div>
   );
 }
